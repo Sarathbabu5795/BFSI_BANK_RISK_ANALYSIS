@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//home/labuser/Desktop/BFSI AI Agent/Capstone cognizant/BFSI_Claude_Code_Python_Dataset/lab_briefs/**)"
+      "Read(//home/labuser/Desktop/BFSI AI Agent/Capstone cognizant/BFSI_Claude_Code_Python_Dataset/lab_briefs/**)",
+      "Bash(git push *)"
     ]
   }
 }
