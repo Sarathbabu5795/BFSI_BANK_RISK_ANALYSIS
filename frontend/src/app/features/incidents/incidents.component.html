@@ -1,0 +1,95 @@
+<div class="page">
+  <h1>Incidents</h1>
+  <p class="subtitle">SLA breaches, status/date conflicts, and module hotspots from the incident log.</p>
+
+  <app-state-banner *ngIf="loading" kind="loading" message="Loading incidents..."></app-state-banner>
+  <app-state-banner *ngIf="error" kind="error" message="Could not reach the backend at localhost:8080. Is it running?"></app-state-banner>
+
+  <ng-container *ngIf="!loading && !error">
+    <div class="chart-grid">
+      <div class="card">
+        <h3 class="section-title">Top Module Hotspots</h3>
+        <ngx-charts-bar-horizontal
+          [results]="moduleHotspotsChart"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [view]="[520, 300]">
+        </ngx-charts-bar-horizontal>
+      </div>
+      <div class="card">
+        <h3 class="section-title">Top Root Causes</h3>
+        <ngx-charts-bar-horizontal
+          [results]="rootCausesChart"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [view]="[520, 300]">
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" [class.active]="view === 'sla'" (click)="setView('sla')">
+        SLA Breaches ({{ slaBreaches.length }})
+      </button>
+      <button class="tab" [class.active]="view === 'conflicts'" (click)="setView('conflicts')">
+        Status/Date Conflicts ({{ statusDateConflicts.length }})
+      </button>
+    </div>
+
+    <div class="card">
+      <ng-container *ngIf="view === 'sla'">
+        <app-state-banner *ngIf="slaBreaches.length === 0" kind="empty" message="No SLA breaches found."></app-state-banner>
+        <table class="data-table" *ngIf="slaBreaches.length > 0">
+          <thead>
+            <tr>
+              <th>Incident ID</th>
+              <th>Module</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Reported</th>
+              <th>Resolved</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of slaBreaches">
+              <td>{{ f.incident.incidentId }}</td>
+              <td>{{ f.incident.applicationModule }}</td>
+              <td><span class="badge badge-warning">{{ f.incident.severity }}</span></td>
+              <td>{{ f.incident.incidentStatus }}</td>
+              <td>{{ f.incident.reportedDatetime }}</td>
+              <td>{{ f.incident.resolvedDatetime || '—' }}</td>
+              <td>{{ f.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+
+      <ng-container *ngIf="view === 'conflicts'">
+        <app-state-banner *ngIf="statusDateConflicts.length === 0" kind="empty" message="No status/date conflicts found."></app-state-banner>
+        <table class="data-table" *ngIf="statusDateConflicts.length > 0">
+          <thead>
+            <tr>
+              <th>Incident ID</th>
+              <th>Module</th>
+              <th>Status</th>
+              <th>Resolved Datetime</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of statusDateConflicts">
+              <td>{{ f.incident.incidentId }}</td>
+              <td>{{ f.incident.applicationModule }}</td>
+              <td><span class="badge badge-danger">{{ f.incident.incidentStatus }}</span></td>
+              <td>{{ f.incident.resolvedDatetime || '—' }}</td>
+              <td>{{ f.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

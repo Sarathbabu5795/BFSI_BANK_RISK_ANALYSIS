@@ -1,0 +1,83 @@
+<div class="page">
+  <h1>API Health</h1>
+  <p class="subtitle">Slow calls, server failures, and top failing APIs from the API access log.</p>
+
+  <app-state-banner *ngIf="loading" kind="loading" message="Loading API health data..."></app-state-banner>
+  <app-state-banner *ngIf="error" kind="error" message="Could not reach the backend at localhost:8080. Is it running?"></app-state-banner>
+
+  <ng-container *ngIf="!loading && !error">
+    <div class="card chart-card">
+      <h3 class="section-title">Top Failing APIs (response ≥ 400)</h3>
+      <ngx-charts-bar-vertical
+        [results]="topFailingChart"
+        [scheme]="colorScheme"
+        [xAxis]="true"
+        [yAxis]="true"
+        [view]="[900, 300]">
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" [class.active]="view === 'slow'" (click)="setView('slow')">
+        Slow Calls ({{ slowCalls.length }})
+      </button>
+      <button class="tab" [class.active]="view === 'failures'" (click)="setView('failures')">
+        Server Failures ({{ failures.length }})
+      </button>
+    </div>
+
+    <div class="card">
+      <ng-container *ngIf="view === 'slow'">
+        <app-state-banner *ngIf="slowCalls.length === 0" kind="empty" message="No slow API calls found."></app-state-banner>
+        <table class="data-table" *ngIf="slowCalls.length > 0">
+          <thead>
+            <tr>
+              <th>Log ID</th>
+              <th>API</th>
+              <th>Endpoint</th>
+              <th>Response Time (ms)</th>
+              <th>Response Code</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of slowCalls">
+              <td>{{ f.apiLog.logId }}</td>
+              <td>{{ f.apiLog.apiName }}</td>
+              <td>{{ f.apiLog.endpoint }}</td>
+              <td><span class="badge badge-warning">{{ f.apiLog.responseTimeMs }}</span></td>
+              <td>{{ f.apiLog.responseCode }}</td>
+              <td>{{ f.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+
+      <ng-container *ngIf="view === 'failures'">
+        <app-state-banner *ngIf="failures.length === 0" kind="empty" message="No server failures found."></app-state-banner>
+        <table class="data-table" *ngIf="failures.length > 0">
+          <thead>
+            <tr>
+              <th>Log ID</th>
+              <th>API</th>
+              <th>Endpoint</th>
+              <th>Response Code</th>
+              <th>Error Code</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of failures">
+              <td>{{ f.apiLog.logId }}</td>
+              <td>{{ f.apiLog.apiName }}</td>
+              <td>{{ f.apiLog.endpoint }}</td>
+              <td><span class="badge badge-danger">{{ f.apiLog.responseCode }}</span></td>
+              <td>{{ f.apiLog.errorCode }}</td>
+              <td>{{ f.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

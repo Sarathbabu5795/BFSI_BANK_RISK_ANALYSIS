@@ -1,0 +1,147 @@
+[
+  {
+    "file": "README.md",
+    "sha256": "69c3965687084caacebde0efebcc7a23a057b42291920964f7db98332f9652c8",
+    "size_bytes": 1102
+  },
+  {
+    "file": "expected_outputs/negative_amount_transactions.csv",
+    "sha256": "64e5ad6b4d57c84a766af4a5f5239f39e5436b6674a41e66cd88fe5001f867ca",
+    "size_bytes": 1366
+  },
+  {
+    "file": "expected_outputs/failed_api_logs_5xx.csv",
+    "sha256": "190907c0f064affef2353479cd757899bd77668f31fe7703de7cb4843c406388",
+    "size_bytes": 22044
+  },
+  {
+    "file": "expected_outputs/future_dated_transactions.csv",
+    "sha256": "37284546085364c36f990b9f3bb60ece6996b8c363caa5683f7849bff36bfeab",
+    "size_bytes": 721
+  },
+  {
+    "file": "expected_outputs/invalid_currency_transactions.csv",
+    "sha256": "3e5c3a0ab17e32e9199d746f46c9a379ef31986de2f073c188be88c3ee9517f9",
+    "size_bytes": 871
+  },
+  {
+    "file": "expected_outputs/status_date_conflict_incidents.csv",
+    "sha256": "11ce03b1100a9cb6226031729997a8a0028155dd174433c27f27b1183f989f92",
+    "size_bytes": 715
+  },
+  {
+    "file": "expected_outputs/expected_high_risk_transactions.csv",
+    "sha256": "042f4cdc1049a2e6fc017a360b04d4c5182e1b19ddea1c6154cbfe3dfa5f3f91",
+    "size_bytes": 1891
+  },
+  {
+    "file": "expected_outputs/kyc_high_value_transactions.csv",
+    "sha256": "908aed73793ebdb1022d7b55a45a44440ca61376164d1693b36f8d020a7a9199",
+    "size_bytes": 76
+  },
+  {
+    "file": "expected_outputs/invalid_customer_relationship_transactions.csv",
+    "sha256": "7861d62e1e8eb0974095508f168ff80063a137382ece01ec29fe04382e6c0454",
+    "size_bytes": 1576
+  },
+  {
+    "file": "expected_outputs/slow_api_logs_over_2000ms.csv",
+    "sha256": "db432be87ac81147d039959b7eacc8b33546a1266489e198ee4839b2dc0bac39",
+    "size_bytes": 288
+  },
+  {
+    "file": "expected_outputs/closed_account_transactions.csv",
+    "sha256": "98997e6e5c10c4864396c99d4c4ad4d5bde3530ddec309cedda39689cdc52417",
+    "size_bytes": 10396
+  },
+  {
+    "file": "expected_outputs/duplicate_transaction_ids.csv",
+    "sha256": "1305cca351eff4284743b4230e60da03d45712b99eab8118cf09bccbaacf551c",
+    "size_bytes": 2041
+  },
+  {
+    "file": "expected_outputs/sla_breached_incidents.csv",
+    "sha256": "c6f096073e46ed69dbbb00d09389424536601c7923c5486cedbe2a4c21da0ae9",
+    "size_bytes": 103103
+  },
+  {
+    "file": "expected_outputs/failed_test_cases.csv",
+    "sha256": "76ed0bef18e54a5ea0b2795cfdd3f191ab06df43a89922fb565ca24e726701b7",
+    "size_bytes": 6746
+  },
+  {
+    "file": "data/api_logs.csv",
+    "sha256": "5f037c00553e46aa5e40f4d6f010b4d297f19dca8320afb742bcd027e361be9d",
+    "size_bytes": 1665972
+  },
+  {
+    "file": "data/transactions.csv",
+    "sha256": "7a031162ceb692667f7a4203a32e8df6e09c67d96bf10ad0dc85e41dda598a2b",
+    "size_bytes": 4175903
+  },
+  {
+    "file": "data/test_cases.csv",
+    "sha256": "58461b4a8b8742cb2ede48eeff3a901a64ea84449aba83d3d945e093c48a4b9d",
+    "size_bytes": 730438
+  },
+  {
+    "file": "data/reference_data.csv",
+    "sha256": "0dcc81abdc34fd4aec67ac5af83a3d95bf0462b94424c2e93f0f9cfccf5e7617",
+    "size_bytes": 7977
+  },
+  {
+    "file": "data/application_logs.csv",
+    "sha256": "f574da3e29460f30981d2a6af87f56d140d9d860f02014c79eee5974b5defe10",
+    "size_bytes": 3065153
+  },
+  {
+    "file": "data/customers.csv",
+    "sha256": "da3be3d618ef89f9eefc8006bf3bee84656de9c2f198966c7ef4252dc6ddf75e",
+    "size_bytes": 1065413
+  },
+  {
+    "file": "data/incidents.csv",
+    "sha256": "c80b7e7470d0c98f459657fe04f3762f3baaa25e2c35de9a052715ffae5ab1fe",
+    "size_bytes": 2213320
+  },
+  {
+    "file": "data/accounts.csv",
+    "sha256": "c4ced7f5e9ac03a0493ee887a52b4b0153c2226d444d643b5b74b1028fda4860",
+    "size_bytes": 1418968
+  },
+  {
+    "file": "docs/01_Data_Dictionary_and_Ground_Truth.xlsx",
+    "sha256": "81f2148053d95a0c1883021f57886eb6b1c2fa098ec1485b1574a2f119c22fd7",
+    "size_bytes": 11456
+  },
+  {
+    "file": "lab_briefs/lab_04_incident_analysis.md",
+    "sha256": "0e44f46b2c37d27e48eb85914b9b5a05c4d5dc9ce72b99448402b5ebe4974654",
+    "size_bytes": 188
+  },
+  {
+    "file": "lab_briefs/lab_05_pytest.md",
+    "sha256": "c5ceea464341a1f6d6ed980fbdbbd8407493347597aa8bebcdaa8528c503e734",
+    "size_bytes": 183
+  },
+  {
+    "file": "lab_briefs/lab_02_data_quality.md",
+    "sha256": "6c678d0e1c4d77638c53f17ab19733e472dd29c565aee24745c9e9a7d73196f5",
+    "size_bytes": 248
+  },
+  {
+    "file": "lab_briefs/lab_06_capstone.md",
+    "sha256": "83cf69f2452033fcb644f0c645d379e271b011420a4702130970f5e1a5fb4d89",
+    "size_bytes": 207
+  },
+  {
+    "file": "lab_briefs/lab_03_fraud_risk.md",
+    "sha256": "7ceb3cdea4174272b1754cc8f63d08269df5e0c8570039180a8ee3ea339c305c",
+    "size_bytes": 212
+  },
+  {
+    "file": "lab_briefs/lab_01_repository_exploration.md",
+    "sha256": "55ad10f089805aa83cb7e53a337b4c11ea3a5b2703bc040f0784c3657b0eebe0",
+    "size_bytes": 197
+  }
+]

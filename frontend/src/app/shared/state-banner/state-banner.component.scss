@@ -1,0 +1,46 @@
+.state-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.loading {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+.loading .dot {
+  background: var(--color-primary);
+  animation: pulse 1.1s ease-in-out infinite;
+}
+
+.error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+.error .dot {
+  background: var(--color-danger);
+}
+
+.empty {
+  background: #f4f6fb;
+  color: var(--color-text-muted);
+}
+.empty .dot {
+  background: var(--color-text-muted);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+app:
+  data-dir: ../data
+  reporting-cutoff: 2026-08-05T00:00:00
+  valid-currencies: INR,USD,EUR,GBP
+  kyc-high-value-threshold: 200000
+  high-risk-score-threshold: 70
+  slow-api-threshold-ms: 2000
+
+logging:
+  level:
+    com.bfsi.risk: INFO

@@ -1,0 +1,107 @@
+<div class="page">
+  <h1>Transactions</h1>
+  <p class="subtitle">Flagged, high-risk, and label-mismatched transactions from the rule engine.</p>
+
+  <app-state-banner *ngIf="loading" kind="loading" message="Loading transactions..."></app-state-banner>
+  <app-state-banner *ngIf="error" kind="error" message="Could not reach the backend at localhost:8080. Is it running?"></app-state-banner>
+
+  <ng-container *ngIf="!loading && !error">
+    <div class="tabs">
+      <button class="tab" [class.active]="view === 'flagged'" (click)="setView('flagged')">
+        Flagged ({{ flags.length }})
+      </button>
+      <button class="tab" [class.active]="view === 'high-risk'" (click)="setView('high-risk')">
+        High Risk ({{ highRisk.length }})
+      </button>
+      <button class="tab" [class.active]="view === 'label-mismatch'" (click)="setView('label-mismatch')">
+        Label Mismatches ({{ labelMismatches.length }})
+      </button>
+    </div>
+
+    <div class="card">
+      <ng-container *ngIf="view === 'flagged'">
+        <div class="filter-row">
+          <label for="rule-filter">Filter by rule</label>
+          <select id="rule-filter" [(ngModel)]="selectedRule">
+            <option *ngFor="let r of rules" [value]="r.code">{{ r.label }}</option>
+          </select>
+        </div>
+
+        <app-state-banner *ngIf="filteredFlags.length === 0" kind="empty" message="No transactions match this rule."></app-state-banner>
+
+        <table class="data-table" *ngIf="filteredFlags.length > 0">
+          <thead>
+            <tr>
+              <th>Rule</th>
+              <th>Transaction ID</th>
+              <th>Customer</th>
+              <th>Amount</th>
+              <th>Currency</th>
+              <th>Date</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of filteredFlags">
+              <td><span class="badge badge-neutral">{{ f.ruleCode }}</span></td>
+              <td>{{ f.transaction.transactionId }}</td>
+              <td>{{ f.transaction.customerId }}</td>
+              <td>{{ f.transaction.transactionAmount | number:'1.2-2' }}</td>
+              <td>{{ f.transaction.currency }}</td>
+              <td>{{ f.transaction.transactionDatetime }}</td>
+              <td>{{ f.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+
+      <ng-container *ngIf="view === 'high-risk'">
+        <app-state-banner *ngIf="highRisk.length === 0" kind="empty" message="No high-risk transactions found."></app-state-banner>
+        <table class="data-table" *ngIf="highRisk.length > 0">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Risk Score</th>
+              <th>Anomaly Score</th>
+              <th>Fraud Flag</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of highRisk">
+              <td>{{ r.transaction.transactionId }}</td>
+              <td><span class="badge badge-danger">{{ r.providedRiskScore }}</span></td>
+              <td>{{ r.computedAnomalyScore }}</td>
+              <td>{{ r.fraudFlagged ? 'Y' : 'N' }}</td>
+              <td>{{ r.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+
+      <ng-container *ngIf="view === 'label-mismatch'">
+        <app-state-banner *ngIf="labelMismatches.length === 0" kind="empty" message="No label mismatches found."></app-state-banner>
+        <table class="data-table" *ngIf="labelMismatches.length > 0">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Risk Score</th>
+              <th>Expected High Risk</th>
+              <th>Fraud Flagged</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of labelMismatches">
+              <td>{{ r.transaction.transactionId }}</td>
+              <td>{{ r.providedRiskScore }}</td>
+              <td>{{ r.expectedHighRisk ? 'Y' : 'N' }}</td>
+              <td>{{ r.fraudFlagged ? 'Y' : 'N' }}</td>
+              <td>{{ r.reason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

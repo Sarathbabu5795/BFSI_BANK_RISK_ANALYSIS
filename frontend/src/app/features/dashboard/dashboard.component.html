@@ -1,0 +1,73 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>Risk Dashboard</h1>
+      <p class="subtitle">Rule-based data quality and fraud risk overview across the BFSI dataset.</p>
+    </div>
+    <a class="btn btn-primary" [href]="reportUrl" target="_blank" rel="noopener">Download PDF Report</a>
+  </div>
+
+  <app-state-banner *ngIf="loading" kind="loading" message="Loading dashboard summary..."></app-state-banner>
+  <app-state-banner *ngIf="error" kind="error" message="Could not reach the backend at localhost:8080. Is it running?"></app-state-banner>
+
+  <ng-container *ngIf="summary && !loading && !error">
+    <div class="stat-grid">
+      <app-stat-card label="Total Transactions" [value]="summary.totalTransactions"></app-stat-card>
+      <app-stat-card label="Flagged Transactions" [value]="summary.flaggedTransactionCount" tone="warning"></app-stat-card>
+      <app-stat-card label="High Risk (score ≥ 70)" [value]="summary.highRiskTransactionCount" tone="danger"></app-stat-card>
+      <app-stat-card label="Label Mismatches" [value]="summary.labelMismatchCount" tone="danger"></app-stat-card>
+      <app-stat-card label="Avg Risk Score" [value]="summary.averageRiskScore"></app-stat-card>
+      <app-stat-card label="SLA Breaches" [value]="summary.slaBreachCount" tone="warning"></app-stat-card>
+      <app-stat-card label="Status/Date Conflicts" [value]="summary.statusDateConflictCount" tone="warning"></app-stat-card>
+      <app-stat-card label="Slow API Calls" [value]="summary.slowApiCount" tone="warning"></app-stat-card>
+      <app-stat-card label="Server Failures (5xx)" [value]="summary.serverFailureCount" tone="danger"></app-stat-card>
+    </div>
+
+    <div class="chart-grid">
+      <div class="card">
+        <h3 class="section-title">Flags by Rule</h3>
+        <ngx-charts-bar-vertical
+          [results]="flagsByRuleChart"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [view]="[520, 320]">
+        </ngx-charts-bar-vertical>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">Risk Category Distribution</h3>
+        <ngx-charts-pie-chart
+          [results]="riskCategoryChart"
+          [scheme]="colorScheme"
+          [labels]="true"
+          [doughnut]="true"
+          [view]="[420, 320]">
+        </ngx-charts-pie-chart>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">Incident Severity Distribution</h3>
+        <ngx-charts-pie-chart
+          [results]="incidentSeverityChart"
+          [scheme]="colorScheme"
+          [labels]="true"
+          [view]="[420, 320]">
+        </ngx-charts-pie-chart>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">Top Incident Module Hotspots</h3>
+        <ngx-charts-bar-horizontal
+          [results]="moduleHotspotsChart"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [view]="[520, 320]">
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+  </ng-container>
+</div>
